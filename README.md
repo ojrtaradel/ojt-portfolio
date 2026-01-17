@@ -1,6 +1,6 @@
 # Oscar Taradel Jr.
 **BSIT Candidate | IT Intern | Experienced Technical Professional**
-📍 [Tantangan, South Cotabato, Philippines] | 📧 oscarjr.taradel@gmail.com 
+📍 Tantangan, South Cotabato, Philippines | 📧 oscarjr.taradel@gmail.com 
 
 ## 👋 About Me
 I am a graduating Bachelor of Science in Information Technology (BSIT) student currently seeking an OJT placement. I offer a unique advantage: **10+ years of professional corporate experience** in Engineering and Technical Support. I combine the fresh technical skills of a student (Python, Web Dev, QA) with the reliability, public speaking confidence, and work ethic of a seasoned professional.
