@@ -20,8 +20,60 @@
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; 
             background-color: var(--bg); 
             color: var(--text); 
-            overflow-x: hidden; 
+            overflow-x: hidden;
+            transition: background-image 0.5s ease-in-out; /* Smooth transition for backgrounds */
         }
+
+        /* --- DYNAMIC BACKGROUNDS --- */
+        /* IMPORTANT: Once you upload your own images, replace the unsplash URLs 
+           below with your filenames (e.g., 'bg-about.jpg', 'bg-history.jpg').
+        */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for readability */
+            z-index: -1;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Default background (used for the hero section initially) */
+        body.bg-default {
+            background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+
+        /* Background for 'About' tab */
+        body.bg-about {
+            background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+        
+        /* Background for 'History' tab */
+        body.bg-history {
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+
+        /* Background for 'Projects' tab */
+        body.bg-projects {
+            background-image: url('https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+
+        /* Background for 'Leadership' tab */
+        body.bg-leadership {
+            background-image: url('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+
+        /* Background for 'Certs' tab */
+        body.bg-certs {
+            background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; background-attachment: fixed;
+        }
+        /* --------------------------- */
+
 
         /* HERO SECTION */
         .hero {
@@ -31,48 +83,37 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, #fff 0%, #f3f4f6 100%);
+            /* background: linear-gradient(135deg, #fff 0%, #f3f4f6 100%); REMOVED for dynamic bg */
             padding: 40px 20px;
+            color: var(--white); /* Changed text to white for better contrast */
         }
 
-        /* NEW PROFILE IMAGE STYLE */
         .profile-img {
-            width: 160px; 
-            height: 160px; 
-            border-radius: 50%; /* Makes it a circle */
-            object-fit: cover; /* Prevents stretching */
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(110, 87, 224, 0.3);
-            border: 5px solid white;
-            animation: float 6s ease-in-out infinite;
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+            margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0, 0.3);
+            border: 5px solid white; animation: float 6s ease-in-out infinite;
         }
 
-        h1 { font-size: 3rem; color: var(--secondary); margin-bottom: 10px; opacity: 0; animation: fadeUp 0.8s forwards; line-height: 1.2; }
-        p.subtitle { font-size: 1.25rem; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s forwards 0.3s; max-width: 600px; }
+        h1 { font-size: 3rem; color: var(--white); margin-bottom: 10px; opacity: 0; animation: fadeUp 0.8s forwards; line-height: 1.2; }
+        p.subtitle { font-size: 1.25rem; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s forwards 0.3s; max-width: 600px; color: rgba(255,255,255,0.9); }
 
         /* TABS CONTAINER */
         .container {
             max-width: 900px; width: 92%;
             background: var(--white); border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.05); overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25); overflow: hidden; /* Increased shadow for depth */
             opacity: 0; animation: fadeUp 1.2s forwards 0.5s; margin-bottom: 50px;
         }
 
         /* TAB NAVIGATION - Mobile Optimized */
         .tabs { 
-            display: flex; 
-            border-bottom: 1px solid #eee; 
-            background: #fafafa; 
-            overflow-x: auto; 
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            display: flex; border-bottom: 1px solid #eee; background: #fafafa; 
+            overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
         }
         .tabs::-webkit-scrollbar { display: none; }
         
         .tab-btn {
-            flex: 0 0 auto;
-            padding: 20px 25px; 
-            border: none; background: none; cursor: pointer;
+            flex: 0 0 auto; padding: 20px 25px; border: none; background: none; cursor: pointer;
             font-weight: 600; color: #9ca3af; transition: all 0.3s ease; 
             position: relative; white-space: nowrap; font-size: 1rem;
         }
@@ -102,7 +143,7 @@
 
         .btn {
             padding: 12px 30px; background: var(--primary); color: white; text-decoration: none;
-            border-radius: 30px; font-weight: bold; display: inline-block; transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 30px; font-weight: bold; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; border: none;
         }
         .btn:active { transform: scale(0.98); }
 
@@ -121,11 +162,10 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-default">
 
     <div class="hero">
         <img src="profile.png" alt="Oscar Taradel Jr." class="profile-img">
-        
         <h1>Hi, I'm Oscar.</h1>
         <p class="subtitle">A graduating IT Student with 10+ years of Engineering experience.</p>
         <a href="#portfolio" class="btn" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">See My Work <i class="fas fa-arrow-down ml-2"></i></a>
@@ -134,11 +174,11 @@
     <div class="hero" style="height: auto; padding-top: 0; background: none;" id="portfolio">
         <div class="container">
             <div class="tabs">
-                <button class="tab-btn active" onclick="openTab(event, 'about')">About</button>
-                <button class="tab-btn" onclick="openTab(event, 'experience')">History</button>
-                <button class="tab-btn" onclick="openTab(event, 'projects')">Projects</button>
-                <button class="tab-btn" onclick="openTab(event, 'leadership')">Leadership</button>
-                <button class="tab-btn" onclick="openTab(event, 'certs')">Certs</button>
+                <button class="tab-btn active" onclick="openTab(event, 'about', 'bg-about')">About</button>
+                <button class="tab-btn" onclick="openTab(event, 'experience', 'bg-history')">History</button>
+                <button class="tab-btn" onclick="openTab(event, 'projects', 'bg-projects')">Projects</button>
+                <button class="tab-btn" onclick="openTab(event, 'leadership', 'bg-leadership')">Leadership</button>
+                <button class="tab-btn" onclick="openTab(event, 'certs', 'bg-certs')">Certs</button>
             </div>
 
             <div class="content">
@@ -245,33 +285,42 @@
     </div>
 
     <script>
-        function openTab(evt, tabName) {
+        // Updated function to accept the background class name
+        function openTab(evt, tabName, bgClass) {
             var i, tabPane, tabBtn;
             
-            // Hide all tab panes
+            // 1. Change Background Image
+            // Remove all possible background classes first
+            document.body.classList.remove('bg-default', 'bg-about', 'bg-history', 'bg-projects', 'bg-leadership', 'bg-certs');
+            // Add the new background class corresponding to the clicked tab
+            document.body.classList.add(bgClass);
+
+            // 2. Hide all tab panes
             tabPane = document.getElementsByClassName("tab-pane");
             for (i = 0; i < tabPane.length; i++) {
                 tabPane[i].classList.remove("active");
                 tabPane[i].style.display = "none"; 
             }
 
-            // Remove active class from buttons
+            // 3. Remove active class from all buttons
             tabBtn = document.getElementsByClassName("tab-btn");
             for (i = 0; i < tabBtn.length; i++) {
                 tabBtn[i].className = tabBtn[i].className.replace(" active", "");
             }
 
-            // Show current tab and add active class
+            // 4. Show current tab and add active class to button
             var selectedTab = document.getElementById(tabName);
             selectedTab.style.display = "block";
-            
-            // Animation timeout
             setTimeout(function() {
                 selectedTab.classList.add("active");
             }, 10);
-            
             evt.currentTarget.classList.add("active");
         }
+
+        // Optional: Set the initial background based on the initially active tab
+        // document.addEventListener('DOMContentLoaded', (event) => {
+        //    openTab({currentTarget: document.querySelector('.tab-btn.active')}, 'about', 'bg-about');
+        // });
     </script>
 </body>
 </html>
