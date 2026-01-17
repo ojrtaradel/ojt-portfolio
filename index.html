@@ -3,157 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscar Taradel Jr. - OJT Candidate</title>
+    <title>Oscar Taradel Jr. | OJT Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --primary-color: #0d6efd; --secondary-color: #6c757d; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; }
-        .hero-section { background: linear-gradient(135deg, #0d6efd, #0043a8); color: white; padding: 100px 0; }
-        .section-title { border-bottom: 3px solid var(--primary-color); display: inline-block; margin-bottom: 30px; padding-bottom: 10px; }
-        .card { border: none; shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .timeline-item { border-left: 2px solid var(--primary-color); padding-left: 20px; margin-bottom: 30px; position: relative; }
-        .timeline-item::before { content: ''; width: 12px; height: 12px; background: var(--primary-color); border-radius: 50%; position: absolute; left: -7px; top: 5px; }
+        :root {
+            --primary-color: #2563eb;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --body-bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--body-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center; /* Centers the card vertically */
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+            overflow-y: auto; /* Allow scroll if screen is too small */
+        }
+
+        /* The Main "Glass" Card */
+        .main-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh; /* Takes up most of the screen */
+        }
+
+        /* Sidebar / Header Area */
+        .profile-header {
+            background: #f1f5f9;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .profile-header h1 { font-weight: 600; color: #1e293b; margin-bottom: 5px; }
+        .tagline { color: var(--primary-color); font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* Navigation Tabs */
+        .nav-pills { justify-content: center; padding: 15px 0; border-bottom: 1px solid #e2e8f0; }
+        .nav-link {
+            color: #64748b;
+            font-weight: 600;
+            margin: 0 10px;
+            border-radius: 50px;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover { background-color: #e2e8f0; color: var(--primary-color); }
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Content Area */
+        .content-area {
+            padding: 30px;
+            flex-grow: 1;
+            overflow-y: auto; /* Internal scroll for content */
+            height: 500px; /* Fixed height to create the "App" feel */
+        }
+
+        /* Animation Classes */
+        .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Experience Timeline Styling */
+        .timeline-item {
+            border-left: 3px solid var(--primary-color);
+            padding-left: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: ''; width: 14px; height: 14px;
+            background: #fff; border: 3px solid var(--primary-color);
+            border-radius: 50%; position: absolute; left: -8.5px; top: 5px;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #999; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container { min-height: auto; height: auto; }
+            .content-area { height: auto; max-height: 600px; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="hero-section text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Oscar Taradel Jr.</h1>
-            <p class="lead">BSIT Candidate | IT Intern | Experienced Technical Professional</p>
-            <div class="mt-4">
-                <a href="mailto:oscarjr.taradel@gmail.com" class="btn btn-light btn-lg me-2"><i class="fas fa-envelope"></i> Contact Me</a>
-                <a href="#" class="btn btn-outline-light btn-lg"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <div class="main-container">
+        <div class="profile-header">
+            <h1>Oscar Taradel Jr.</h1>
+            <p class="tagline">Experienced Professional & BSIT Candidate</p>
+            <div class="mt-3">
+                <a href="mailto:oscarjr.taradel@gmail.com" class="btn btn-outline-primary btn-sm rounded-pill px-4"><i class="fas fa-envelope me-2"></i>Email Me</a>
             </div>
         </div>
-    </header>
 
-    <section class="container my-5">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <h2 class="section-title">About Me</h2>
-                <p class="lead text-muted">
-                    I am a graduating BSIT student with a unique advantage: <strong>10+ years of professional corporate experience</strong>. 
-                    Unlike typical interns, I combine fresh technical skills (Python, Web Dev, QA) with the reliability, communication, and work ethic of a seasoned engineer.
-                </p>
-            </div>
-        </div>
-    </section>
+        <ul class="nav nav-pills" id="portfolioTabs">
+            <li class="nav-item"><a class="nav-link active" href="#" onclick="switchTab('about')">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('experience')">Experience</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('projects')">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('leadership')">Leadership</a></li>
+        </ul>
 
-    <section class="bg-white py-5">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="row text-center">
-                <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 bg-light">
-                        <i class="fab fa-php fa-3x text-primary mb-3"></i>
-                        <h5>Web Dev</h5>
-                        <p class="small">Laravel, PHP, JavaScript (Zuit Bootcamp), HTML/CSS</p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 bg-light">
-                        <i class="fab fa-python fa-3x text-warning mb-3"></i>
-                        <h5>Programming</h5>
-                        <p class="small">Python, Java, Android Dev, React Native</p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 bg-light">
-                        <i class="fas fa-server fa-3x text-success mb-3"></i>
-                        <h5>Enterprise</h5>
-                        <p class="small"><strong>SAP Certified Operator</strong>, MySQL, VS Code</p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="card p-3 h-100 bg-light">
-                        <i class="fas fa-bug fa-3x text-danger mb-3"></i>
-                        <h5>QA & Testing</h5>
-                        <p class="small">System Testing, User Manuals, Documentation</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container my-5">
-        <h2 class="section-title">Academic Projects</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-graduation-cap"></i> Capstone Project</h5>
-                        <h6 class="text-primary">Online School Event Management System</h6>
-                        <p class="card-text">A Laravel-based system with a student mobile app using QR codes to automate attendance tracking. Successfully defended in Dec 2025.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-microphone"></i> Karaoke App</h5>
-                        <h6 class="text-primary">Desktop Application (Python)</h6>
-                        <p class="card-text">Developed a GUI-based desktop app featuring playlist queuing and audio playback controls using Python and Tkinter.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-clipboard-check"></i> QA Testing</h5>
-                        <h6 class="text-primary">EventGo Platform</h6>
-                        <p class="card-text">Conducted manual system testing and authored the "System Tester's Guide" for the <em>gvcfi-eventgo.com</em> website.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-light py-5">
-        <div class="container">
-            <h2 class="section-title">Professional Experience (10+ Years)</h2>
+        <div class="content-area">
             
-            <div class="timeline-item">
-                <h5>Engineer</h5>
-                <p class="text-primary mb-1">Movate Philippines INC (BGC) | 2021 - 2024</p>
-                <p>Managed technical workflows and maintained high standards of service delivery for 3 years.</p>
+            <div id="about" class="tab-content active">
+                <h3 class="mb-4">Why Hire Me?</h3>
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <p class="lead text-muted">I am not your typical intern. With <strong>10+ years of corporate engineering experience</strong>, I bring professional maturity to my new career in IT.</p>
+                        <div class="row mt-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="p-3 border rounded bg-light text-center">
+                                    <i class="fab fa-js fa-2x text-warning mb-2"></i>
+                                    <h6 class="fw-bold">JavaScript</h6>
+                                    <small>Zuit Bootcamp</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="p-3 border rounded bg-light text-center">
+                                    <i class="fas fa-database fa-2x text-primary mb-2"></i>
+                                    <h6 class="fw-bold">SAP Certified</h6>
+                                    <small>Systems Operator</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="p-3 border rounded bg-light text-center">
+                                    <i class="fab fa-python fa-2x text-success mb-2"></i>
+                                    <h6 class="fw-bold">Python</h6>
+                                    <small>App Development</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="timeline-item">
-                <h5>Senior Agent</h5>
-                <p class="text-primary mb-1">iQor Philippines (Cavite) | 2020 - 2021</p>
-                <p>Handled high-priority escalations and complex problem-solving.</p>
+            <div id="experience" class="tab-content">
+                <h3 class="mb-4">Professional History (10+ Years)</h3>
+                <div class="timeline-item">
+                    <h5 class="fw-bold">Engineer</h5>
+                    <span class="badge bg-primary mb-2">Movate Philippines (BGC) | 2021 - 2024</span>
+                    <p class="text-muted">Managed technical workflows and maintained high standards of service delivery for 3 years.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold">Senior Agent</h5>
+                    <span class="badge bg-secondary mb-2">iQor Philippines (Cavite) | 2020 - 2021</span>
+                    <p class="text-muted">Specialized in complex problem solving and client resolution.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5 class="fw-bold">Telco Technical Support</h5>
+                    <span class="badge bg-secondary mb-2">IBEX Global (Parañaque) | 2018 - 2020</span>
+                    <p class="text-muted">Expert in troubleshooting hardware, routers, and network configurations.</p>
+                </div>
             </div>
 
-            <div class="timeline-item">
-                <h5>Telco Technical Support</h5>
-                <p class="text-primary mb-1">IBEX Global (Parañaque) | 2018 - 2020</p>
-                <p>Diagnosed hardware/network connectivity issues—skills transferable to IT Support/QA.</p>
+            <div id="projects" class="tab-content">
+                <h3 class="mb-4">Academic Work</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary"><i class="fas fa-qrcode me-2"></i>School Event System</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Capstone Project (Dec 2025)</h6>
+                                <p class="card-text small">Developed a Laravel-based system with a student mobile app. Uses QR codes to automate attendance tracking, replacing paper records.</p>
+                                <span class="badge bg-dark">Laravel</span>
+                                <span class="badge bg-dark">Android</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="card-title text-success"><i class="fas fa-music me-2"></i>Karaoke Desktop App</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Python GUI Project</h6>
+                                <p class="card-text small">Built a fully functional desktop app with playlist management and audio playback using Python and Tkinter.</p>
+                                <span class="badge bg-dark">Python</span>
+                                <span class="badge bg-dark">Tkinter</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card shadow-sm border-0 bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="fas fa-check-double me-2"></i>QA & Documentation: EventGo</h5>
+                                <p class="mb-0">Created the official <strong>"System Tester's Guide"</strong> and conducted manual testing for <em>gvcfi-eventgo.com</em>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="timeline-item">
-                <h5>SoundTech & Stage Production Manager</h5>
-                <p class="text-primary mb-1">Global Surge Camps (Pasig) | 2012 - 2016</p>
-                <p>Managed technical audio setups and production logistics for large-scale events.</p>
+
+            <div id="leadership" class="tab-content">
+                <h3 class="mb-4">Leadership & Soft Skills</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-microphone-alt fa-2x text-danger me-3"></i>
+                            <div>
+                                <h6 class="fw-bold">Event Host / MC</h6>
+                                <p class="small text-muted">Professional host for weddings and birthdays. I know how to manage crowds and communicate clearly.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-chalkboard-teacher fa-2x text-info me-3"></i>
+                            <div>
+                                <h6 class="fw-bold">Sunday School Teacher</h6>
+                                <p class="small text-muted">Experienced in breaking down complex ideas and mentoring others with patience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-sliders-h fa-2x text-warning me-3"></i>
+                            <div>
+                                <h6 class="fw-bold">Production Manager</h6>
+                                <p class="small text-muted">Former Stage Manager for Global Surge Camps. Managed technical audio setups and logistics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-star fa-2x text-primary me-3"></i>
+                            <div>
+                                <h6 class="fw-bold">Program Director</h6>
+                                <p class="small text-muted">Facilitated 4 seasons of Youth Talent Shows.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <section class="container my-5 text-center">
-        <h2 class="section-title">Certifications</h2>
-        <div class="d-flex flex-wrap justify-content-center gap-3">
-            <span class="badge bg-dark p-3">Certified SAP Systems Operator</span>
-            <span class="badge bg-dark p-3">TESDA Bookkeeping NC III</span>
-            <span class="badge bg-dark p-3">TESDA Contact Center Services NC II</span>
-            <span class="badge bg-primary p-3">Zuit JavaScript Bootcamp</span>
-        </div>
-    </section>
+        </div> </div> <script>
+        function switchTab(tabId) {
+            // 1. Remove 'active' class from all nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
 
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2026 Oscar Taradel Jr. | <a href="mailto:oscarjr.taradel@gmail.com" class="text-white">oscarjr.taradel@gmail.com</a></p>
-    </footer>
+            // 2. Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
 
+            // 3. Add 'active' class to clicked link (we find it by event target matching is tricky, 
+            //    so we just loop through links to find the one that calls this ID, 
+            //    OR simpler: just add active to the clicked element passed as 'this' if we adjusted the function.
+            //    But here is a robust way:
+            event.currentTarget.classList.add('active');
+
+            // 4. Show the specific tab content with animation
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
 </body>
 </html>
