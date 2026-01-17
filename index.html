@@ -3,282 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscar Taradel Jr. | OJT Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>Oscar Taradel Jr. | OJT Profile</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* CSS Variables for Easy Theming */
         :root {
-            --primary-color: #2563eb;
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --body-bg: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --primary: #6E57E0; /* Friendly Purple/Blue */
+            --secondary: #24292e;
+            --bg: #F9FAFC;
+            --white: #ffffff;
+            --text: #4b5563;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--body-bg);
-            min-height: 100vh;
-            display: flex;
-            align-items: center; /* Centers the card vertically */
-            justify-content: center;
-            padding: 20px;
-            color: #333;
-            overflow-y: auto; /* Allow scroll if screen is too small */
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* The Main "Glass" Card */
-        .main-container {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            width: 100%;
-            max-width: 1000px;
-            overflow: hidden;
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 80vh; /* Takes up most of the screen */
-        }
-
-        /* Sidebar / Header Area */
-        .profile-header {
-            background: #f1f5f9;
-            padding: 30px;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            border-bottom: 1px solid #e2e8f0;
+            background: linear-gradient(135deg, #fff 0%, #f3f4f6 100%);
+            padding: 20px;
         }
 
-        .profile-header h1 { font-weight: 600; color: #1e293b; margin-bottom: 5px; }
-        .tagline { color: var(--primary-color); font-weight: 500; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
-
-        /* Navigation Tabs */
-        .nav-pills { justify-content: center; padding: 15px 0; border-bottom: 1px solid #e2e8f0; }
-        .nav-link {
-            color: #64748b;
-            font-weight: 600;
-            margin: 0 10px;
-            border-radius: 50px;
-            padding: 10px 25px;
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover { background-color: #e2e8f0; color: var(--primary-color); }
-        .nav-link.active {
-            background-color: var(--primary-color);
-            color: white;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-        }
-
-        /* Content Area */
-        .content-area {
-            padding: 30px;
-            flex-grow: 1;
-            overflow-y: auto; /* Internal scroll for content */
-            height: 500px; /* Fixed height to create the "App" feel */
-        }
-
-        /* Animation Classes */
-        .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
-        .tab-content.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Experience Timeline Styling */
-        .timeline-item {
-            border-left: 3px solid var(--primary-color);
-            padding-left: 20px;
+        .avatar-circle {
+            width: 150px;
+            height: 150px;
+            background: #e5e7eb;
+            border-radius: 50%;
             margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+            box-shadow: 0 10px 25px rgba(110, 87, 224, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h1 { font-size: 3rem; color: var(--secondary); margin-bottom: 10px; opacity: 0; animation: fadeUp 0.8s forwards; }
+        p.subtitle { font-size: 1.25rem; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s forwards 0.3s; }
+
+        /* TABS CONTAINER */
+        .container {
+            max-width: 900px;
+            width: 90%;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.05);
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeUp 1.2s forwards 0.5s;
+            margin-bottom: 50px;
+        }
+
+        /* TAB NAVIGATION */
+        .tabs { display: flex; border-bottom: 1px solid #eee; background: #fafafa; }
+        .tab-btn {
+            flex: 1;
+            padding: 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #9ca3af;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .tab-btn:hover { color: var(--primary); background: #f3f4f6; }
+        .tab-btn.active { color: var(--primary); background: var(--white); }
+        .tab-btn.active::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary);
+        }
+
+        /* CONTENT AREA */
+        .content { padding: 40px; min-height: 400px; }
+        .tab-pane { display: none; animation: slideIn 0.4s ease-out; }
+        .tab-pane.active { display: block; }
+
+        /* GRID LAYOUTS */
+        .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 20px; text-align: center; }
+        .skill-item { padding: 15px; background: #f9f9f9; border-radius: 10px; transition: transform 0.2s; }
+        .skill-item:hover { transform: translateY(-5px); background: #f0f0f0; }
+        .skill-item i { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
+
+        .timeline-item {
+            border-left: 2px solid var(--primary);
+            padding-left: 20px;
+            margin-bottom: 30px;
             position: relative;
         }
         .timeline-item::before {
-            content: ''; width: 14px; height: 14px;
-            background: #fff; border: 3px solid var(--primary-color);
-            border-radius: 50%; position: absolute; left: -8.5px; top: 5px;
+            content: ''; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; position: absolute; left: -7px; top: 0;
         }
 
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #999; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-container { min-height: auto; height: auto; }
-            .content-area { height: auto; max-height: 600px; }
+        /* BUTTONS */
+        .btn {
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(110, 87, 224, 0.3); }
+
+        /* ANIMATIONS */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) { h1 { font-size: 2rem; } .tabs { flex-direction: column; } }
     </style>
 </head>
 <body>
 
-    <div class="main-container">
-        <div class="profile-header">
-            <h1>Oscar Taradel Jr.</h1>
-            <p class="tagline">Experienced Professional & BSIT Candidate</p>
-            <div class="mt-3">
-                <a href="mailto:oscarjr.taradel@gmail.com" class="btn btn-outline-primary btn-sm rounded-pill px-4"><i class="fas fa-envelope me-2"></i>Email Me</a>
+    <div class="hero">
+        <div class="avatar-circle"><i class="fas fa-user-tie"></i></div>
+        <h1>Hi, I'm Oscar.</h1>
+        <p class="subtitle">A graduating IT Student with 10+ years of Engineering experience.</p>
+        <a href="#portfolio" class="btn" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">See My Work <i class="fas fa-arrow-down ml-2"></i></a>
+    </div>
+
+    <div class="hero" style="height: auto; padding-top: 50px;" id="portfolio">
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'about')">About Me</button>
+                <button class="tab-btn" onclick="openTab(event, 'experience')">History</button>
+                <button class="tab-btn" onclick="openTab(event, 'projects')">Projects</button>
+                <button class="tab-btn" onclick="openTab(event, 'skills')">Skills</button>
+            </div>
+
+            <div class="content">
+                
+                <div id="about" class="tab-pane active">
+                    <h2>IT Student + Corporate Pro</h2>
+                    <p style="margin-top: 15px; line-height: 1.6;">
+                        I am currently looking for an OJT placement. Unlike most students, I bring a decade of real-world work experience. 
+                        I have worked as an <strong>Engineer</strong>, a <strong>Technical Support Specialist</strong>, and a <strong>Production Manager</strong>.
+                    </p>
+                    <p style="margin-top: 15px;">
+                        I am reliable, I communicate well, and I have fresh technical skills in <strong>Python, Web Development, and QA Testing</strong>.
+                    </p>
+                    <div style="margin-top: 30px; display: flex; gap: 10px;">
+                        <span style="background: #eef2ff; color: var(--primary); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem;">10 Years Exp</span>
+                        <span style="background: #eef2ff; color: var(--primary); padding: 5px 15px; border-radius: 15px; font-size: 0.9rem;">OJT Ready</span>
+                    </div>
+                </div>
+
+                <div id="experience" class="tab-pane">
+                    <div class="timeline-item">
+                        <h3>Engineer</h3>
+                        <p class="text-muted">Movate Philippines (BGC) | 2021 - 2024</p>
+                        <p>Managed technical workflows and maintained high standards of service.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Senior Agent</h3>
+                        <p class="text-muted">iQor Philippines (Cavite) | 2020 - 2021</p>
+                        <p>Handled high-priority escalations and client resolution.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Technical Support</h3>
+                        <p class="text-muted">IBEX Global | 2018 - 2020</p>
+                        <p>Troubleshot hardware and network issues.</p>
+                    </div>
+                </div>
+
+                <div id="projects" class="tab-pane">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div style="background: #f3f4f6; padding: 20px; border-radius: 10px;">
+                            <h3 style="color: var(--primary);">Capstone Project</h3>
+                            <p style="font-size: 0.9rem;">School Event Management System with QR Code Attendance.</p>
+                            <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Laravel • Android</span>
+                        </div>
+                        <div style="background: #f3f4f6; padding: 20px; border-radius: 10px;">
+                            <h3 style="color: var(--primary);">Karaoke App</h3>
+                            <p style="font-size: 0.9rem;">Desktop app with playlist queuing and audio control.</p>
+                            <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Python • Tkinter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="skills" class="tab-pane">
+                    <div class="skill-grid">
+                        <div class="skill-item"><i class="fab fa-js"></i><p>JavaScript</p></div>
+                        <div class="skill-item"><i class="fab fa-php"></i><p>Laravel</p></div>
+                        <div class="skill-item"><i class="fab fa-python"></i><p>Python</p></div>
+                        <div class="skill-item"><i class="fas fa-database"></i><p>MySQL</p></div>
+                        <div class="skill-item"><i class="fas fa-certificate"></i><p>SAP Certified</p></div>
+                        <div class="skill-item"><i class="fas fa-book"></i><p>Bookkeeping</p></div>
+                    </div>
+                </div>
+
             </div>
         </div>
+        <p style="margin-bottom: 50px; color: #999;">&copy; 2026 Oscar Taradel Jr.</p>
+    </div>
 
-        <ul class="nav nav-pills" id="portfolioTabs">
-            <li class="nav-item"><a class="nav-link active" href="#" onclick="switchTab('about')">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('experience')">Experience</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('projects')">Projects</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="switchTab('leadership')">Leadership</a></li>
-        </ul>
-
-        <div class="content-area">
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabPane, tabBtn;
             
-            <div id="about" class="tab-content active">
-                <h3 class="mb-4">Why Hire Me?</h3>
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <p class="lead text-muted">I am not your typical intern. With <strong>10+ years of corporate engineering experience</strong>, I bring professional maturity to my new career in IT.</p>
-                        <div class="row mt-4">
-                            <div class="col-md-4 mb-3">
-                                <div class="p-3 border rounded bg-light text-center">
-                                    <i class="fab fa-js fa-2x text-warning mb-2"></i>
-                                    <h6 class="fw-bold">JavaScript</h6>
-                                    <small>Zuit Bootcamp</small>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="p-3 border rounded bg-light text-center">
-                                    <i class="fas fa-database fa-2x text-primary mb-2"></i>
-                                    <h6 class="fw-bold">SAP Certified</h6>
-                                    <small>Systems Operator</small>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <div class="p-3 border rounded bg-light text-center">
-                                    <i class="fab fa-python fa-2x text-success mb-2"></i>
-                                    <h6 class="fw-bold">Python</h6>
-                                    <small>App Development</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            // Hide all tab panes
+            tabPane = document.getElementsByClassName("tab-pane");
+            for (i = 0; i < tabPane.length; i++) {
+                tabPane[i].classList.remove("active");
+            }
 
-            <div id="experience" class="tab-content">
-                <h3 class="mb-4">Professional History (10+ Years)</h3>
-                <div class="timeline-item">
-                    <h5 class="fw-bold">Engineer</h5>
-                    <span class="badge bg-primary mb-2">Movate Philippines (BGC) | 2021 - 2024</span>
-                    <p class="text-muted">Managed technical workflows and maintained high standards of service delivery for 3 years.</p>
-                </div>
-                <div class="timeline-item">
-                    <h5 class="fw-bold">Senior Agent</h5>
-                    <span class="badge bg-secondary mb-2">iQor Philippines (Cavite) | 2020 - 2021</span>
-                    <p class="text-muted">Specialized in complex problem solving and client resolution.</p>
-                </div>
-                <div class="timeline-item">
-                    <h5 class="fw-bold">Telco Technical Support</h5>
-                    <span class="badge bg-secondary mb-2">IBEX Global (Parañaque) | 2018 - 2020</span>
-                    <p class="text-muted">Expert in troubleshooting hardware, routers, and network configurations.</p>
-                </div>
-            </div>
+            // Remove active class from buttons
+            tabBtn = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabBtn.length; i++) {
+                tabBtn[i].className = tabBtn[i].className.replace(" active", "");
+            }
 
-            <div id="projects" class="tab-content">
-                <h3 class="mb-4">Academic Work</h3>
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title text-primary"><i class="fas fa-qrcode me-2"></i>Online School Event Management System with Student Mobile Services for GVCFI</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Capstone Project (Dec 2025)</h6>
-                                <p class="card-text small">Developed a Laravel-based system with a student mobile app. Uses QR codes to automate attendance tracking, replacing paper records.</p>
-                                <span class="badge bg-dark">Laravel</span>
-                                <span class="badge bg-dark">Android</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
-                            <div class="card-body">
-                                <h5 class="card-title text-success"><i class="fas fa-music me-2"></i>Karaoke Desktop App</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Python GUI Project</h6>
-                                <p class="card-text small">Built a fully functional desktop app with playlist management and audio playback using Python and Tkinter.</p>
-                                <span class="badge bg-dark">Python</span>
-                                <span class="badge bg-dark">Tkinter</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card shadow-sm border-0 bg-light">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-check-double me-2"></i>QA & Documentation: EventGo</h5>
-                                <p class="mb-0">Created the official <strong>"System Tester's Guide"</strong> and conducted manual testing for <em>gvcfi-eventgo.com</em>.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="leadership" class="tab-content">
-                <h3 class="mb-4">Leadership & Soft Skills</h3>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-start">
-                            <i class="fas fa-microphone-alt fa-2x text-danger me-3"></i>
-                            <div>
-                                <h6 class="fw-bold">Event Host / MC</h6>
-                                <p class="small text-muted">Professional host for weddings and birthdays. I know how to manage crowds and communicate clearly.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-start">
-                            <i class="fas fa-chalkboard-teacher fa-2x text-info me-3"></i>
-                            <div>
-                                <h6 class="fw-bold">Sunday School Teacher</h6>
-                                <p class="small text-muted">Experienced in breaking down complex ideas and mentoring others with patience.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-start">
-                            <i class="fas fa-sliders-h fa-2x text-warning me-3"></i>
-                            <div>
-                                <h6 class="fw-bold">Production Manager</h6>
-                                <p class="small text-muted">Former Stage Manager for Global Surge Camps. Managed technical audio setups and logistics.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="d-flex align-items-start">
-                            <i class="fas fa-star fa-2x text-primary me-3"></i>
-                            <div>
-                                <h6 class="fw-bold">Program Director</h6>
-                                <p class="small text-muted">Facilitated 4 seasons of Youth Talent Shows.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div> </div> <script>
-        function switchTab(tabId) {
-            // 1. Remove 'active' class from all nav links
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            // 2. Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-
-            // 3. Add 'active' class to clicked link (we find it by event target matching is tricky, 
-            //    so we just loop through links to find the one that calls this ID, 
-            //    OR simpler: just add active to the clicked element passed as 'this' if we adjusted the function.
-            //    But here is a robust way:
-            event.currentTarget.classList.add('active');
-
-            // 4. Show the specific tab content with animation
-            document.getElementById(tabId).classList.add('active');
+            // Show current tab and add active class
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
     </script>
 </body>
