@@ -6,9 +6,9 @@
     <title>Oscar Taradel Jr. | OJT Profile</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* CSS Variables for Easy Theming */
+        /* CSS Variables */
         :root {
-            --primary: #6E57E0; /* Friendly Purple/Blue */
+            --primary: #6E57E0; /* Friendly Purple */
             --secondary: #24292e;
             --bg: #F9FAFC;
             --white: #ffffff;
@@ -31,16 +31,9 @@
         }
 
         .avatar-circle {
-            width: 150px;
-            height: 150px;
-            background: #e5e7eb;
-            border-radius: 50%;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--primary);
+            width: 150px; height: 150px; background: #e5e7eb; border-radius: 50%;
+            margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; color: var(--primary);
             box-shadow: 0 10px 25px rgba(110, 87, 224, 0.2);
             animation: float 6s ease-in-out infinite;
         }
@@ -50,35 +43,20 @@
 
         /* TABS CONTAINER */
         .container {
-            max-width: 900px;
-            width: 90%;
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.05);
-            overflow: hidden;
-            opacity: 0;
-            animation: fadeUp 1.2s forwards 0.5s;
-            margin-bottom: 50px;
+            max-width: 900px; width: 90%; background: var(--white); border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.05); overflow: hidden;
+            opacity: 0; animation: fadeUp 1.2s forwards 0.5s; margin-bottom: 50px;
         }
 
         /* TAB NAVIGATION */
-        .tabs { display: flex; border-bottom: 1px solid #eee; background: #fafafa; }
+        .tabs { display: flex; border-bottom: 1px solid #eee; background: #fafafa; overflow-x: auto; }
         .tab-btn {
-            flex: 1;
-            padding: 20px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-weight: 600;
-            color: #9ca3af;
-            transition: all 0.3s ease;
-            position: relative;
+            flex: 1; padding: 20px; border: none; background: none; cursor: pointer;
+            font-weight: 600; color: #9ca3af; transition: all 0.3s ease; position: relative; white-space: nowrap;
         }
         .tab-btn:hover { color: var(--primary); background: #f3f4f6; }
         .tab-btn.active { color: var(--primary); background: var(--white); }
-        .tab-btn.active::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary);
-        }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary); }
 
         /* CONTENT AREA */
         .content { padding: 40px; min-height: 400px; }
@@ -91,26 +69,17 @@
         .skill-item:hover { transform: translateY(-5px); background: #f0f0f0; }
         .skill-item i { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
 
-        .timeline-item {
-            border-left: 2px solid var(--primary);
-            padding-left: 20px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-        .timeline-item::before {
-            content: ''; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; position: absolute; left: -7px; top: 0;
-        }
+        .timeline-item { border-left: 2px solid var(--primary); padding-left: 20px; margin-bottom: 30px; position: relative; }
+        .timeline-item::before { content: ''; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; position: absolute; left: -7px; top: 0; }
+
+        /* LIST STYLES */
+        .custom-list li { margin-bottom: 15px; display: flex; align-items: start; }
+        .custom-list i { color: var(--primary); margin-right: 15px; margin-top: 5px; }
 
         /* BUTTONS */
         .btn {
-            padding: 12px 30px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            display: inline-block;
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 12px 30px; background: var(--primary); color: white; text-decoration: none;
+            border-radius: 30px; font-weight: bold; display: inline-block; transition: transform 0.2s, box-shadow 0.2s;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(110, 87, 224, 0.3); }
 
@@ -119,8 +88,7 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
 
-        /* RESPONSIVE */
-        @media (max-width: 600px) { h1 { font-size: 2rem; } .tabs { flex-direction: column; } }
+        @media (max-width: 600px) { h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
@@ -135,10 +103,11 @@
     <div class="hero" style="height: auto; padding-top: 50px;" id="portfolio">
         <div class="container">
             <div class="tabs">
-                <button class="tab-btn active" onclick="openTab(event, 'about')">About Me</button>
+                <button class="tab-btn active" onclick="openTab(event, 'about')">About</button>
                 <button class="tab-btn" onclick="openTab(event, 'experience')">History</button>
                 <button class="tab-btn" onclick="openTab(event, 'projects')">Projects</button>
-                <button class="tab-btn" onclick="openTab(event, 'skills')">Skills</button>
+                <button class="tab-btn" onclick="openTab(event, 'leadership')">Leadership</button>
+                <button class="tab-btn" onclick="openTab(event, 'certs')">Certs</button>
             </div>
 
             <div class="content">
@@ -161,18 +130,28 @@
                 <div id="experience" class="tab-pane">
                     <div class="timeline-item">
                         <h3>Engineer</h3>
-                        <p class="text-muted">Movate Philippines (BGC) | 2021 - 2024</p>
+                        <p class="text-muted">Movate Philippines (BGC, Taguig City) | 2021 - 2024</p>
                         <p>Managed technical workflows and maintained high standards of service.</p>
                     </div>
                     <div class="timeline-item">
                         <h3>Senior Agent</h3>
-                        <p class="text-muted">iQor Philippines (Cavite) | 2020 - 2021</p>
+                        <p class="text-muted">iQor Philippines (Dasmariñas City, Cavite) | 2020 - 2021</p>
                         <p>Handled high-priority escalations and client resolution.</p>
                     </div>
                     <div class="timeline-item">
                         <h3>Technical Support</h3>
-                        <p class="text-muted">IBEX Global | 2018 - 2020</p>
+                        <p class="text-muted">IBEX Global (Parañaque City) | 2018 - 2020</p>
                         <p>Troubleshot hardware and network issues.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Marketing And Public Relations Manager</h3>
+                        <p class="text-muted">Taiwan Trade Center (Makati City) | 2016 - 2017</p>
+                        <p>Developed strong project management and professional communication skills.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>SoundTech and Stage Production Manage</h3>
+                        <p class="text-muted">Taiwan Trade Center (Pasig City) | 2012 - 2016</p>
+                        <p>Developed strong project management and professional communication skills.</p>
                     </div>
                 </div>
 
@@ -180,8 +159,8 @@
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div style="background: #f3f4f6; padding: 20px; border-radius: 10px;">
                             <h3 style="color: var(--primary);">Capstone Project</h3>
-                            <p style="font-size: 0.9rem;">School Event Management System with QR Code Attendance.</p>
-                            <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Laravel • Android</span>
+                            <p style="font-size: 0.9rem;">Online School Event Management System with Student Mobile Services for GVCFI</p>
+                            <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Laravel • Android • IOS React Native </span>
                         </div>
                         <div style="background: #f3f4f6; padding: 20px; border-radius: 10px;">
                             <h3 style="color: var(--primary);">Karaoke App</h3>
@@ -191,14 +170,46 @@
                     </div>
                 </div>
 
-                <div id="skills" class="tab-pane">
+                <div id="leadership" class="tab-pane">
+                    <ul class="custom-list" style="list-style: none;">
+                        <li>
+                            <i class="fas fa-microphone-alt fa-2x"></i>
+                            <div>
+                                <strong>Professional Event Host / MC</strong><br>
+                                <span class="text-muted">Hosted weddings, birthdays, and dedication events. Skilled in public speaking and crowd engagement.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-star fa-2x"></i>
+                            <div>
+                                <strong>Youth Talent Show Director</strong><br>
+                                <span class="text-muted">Facilitated and directed 4 seasons of youth productions.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-sliders-h fa-2x"></i>
+                            <div>
+                                <strong>Stage Production Manager</strong><br>
+                                <span class="text-muted">Global Surge Camps (2012-2016). Managed technical audio setups and logistics.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-book-open fa-2x"></i>
+                            <div>
+                                <strong>Sunday School Teacher</strong><br>
+                                <span class="text-muted">Experienced in mentoring and teaching complex concepts to various age groups.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="certs" class="tab-pane">
                     <div class="skill-grid">
-                        <div class="skill-item"><i class="fab fa-js"></i><p>JavaScript</p></div>
-                        <div class="skill-item"><i class="fab fa-php"></i><p>Laravel</p></div>
-                        <div class="skill-item"><i class="fab fa-python"></i><p>Python</p></div>
-                        <div class="skill-item"><i class="fas fa-database"></i><p>MySQL</p></div>
-                        <div class="skill-item"><i class="fas fa-certificate"></i><p>SAP Certified</p></div>
-                        <div class="skill-item"><i class="fas fa-book"></i><p>Bookkeeping</p></div>
+                        <div class="skill-item"><i class="fas fa-certificate"></i><p>SAP Certified Operator</p></div>
+                        <div class="skill-item"><i class="fas fa-calculator"></i><p>TESDA Bookkeeping NC III</p></div>
+                        <div class="skill-item"><i class="fas fa-headset"></i><p>TESDA Contact Center NC II</p></div>
+                        <div class="skill-item"><i class="fab fa-js-square"></i><p>Zuit JavaScript Bootcamp</p></div>
+                        <div class="skill-item"><i class="fas fa-user-graduate"></i><p>BSIT (2026)</p></div>
                     </div>
                 </div>
 
