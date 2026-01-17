@@ -25,7 +25,7 @@
 
         /* HERO SECTION */
         .hero {
-            min-height: 90vh; /* changed from fixed 100vh for mobile address bars */
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -35,11 +35,15 @@
             padding: 40px 20px;
         }
 
-        .avatar-circle {
-            width: 140px; height: 140px; background: #e5e7eb; border-radius: 50%;
-            margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; color: var(--primary);
-            box-shadow: 0 10px 25px rgba(110, 87, 224, 0.2);
+        /* NEW PROFILE IMAGE STYLE */
+        .profile-img {
+            width: 160px; 
+            height: 160px; 
+            border-radius: 50%; /* Makes it a circle */
+            object-fit: cover; /* Prevents stretching */
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(110, 87, 224, 0.3);
+            border: 5px solid white;
             animation: float 6s ease-in-out infinite;
         }
 
@@ -48,7 +52,7 @@
 
         /* TABS CONTAINER */
         .container {
-            max-width: 900px; width: 92%; /* Slightly wider on mobile */
+            max-width: 900px; width: 92%;
             background: var(--white); border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0,0,0,0.05); overflow: hidden;
             opacity: 0; animation: fadeUp 1.2s forwards 0.5s; margin-bottom: 50px;
@@ -60,13 +64,13 @@
             border-bottom: 1px solid #eee; 
             background: #fafafa; 
             overflow-x: auto; 
-            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
-            scrollbar-width: none; /* Hide scrollbar Firefox */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
-        .tabs::-webkit-scrollbar { display: none; /* Hide scrollbar Chrome/Safari */ }
+        .tabs::-webkit-scrollbar { display: none; }
         
         .tab-btn {
-            flex: 0 0 auto; /* Don't shrink buttons on mobile */
+            flex: 0 0 auto;
             padding: 20px 25px; 
             border: none; background: none; cursor: pointer;
             font-weight: 600; color: #9ca3af; transition: all 0.3s ease; 
@@ -82,12 +86,7 @@
         .tab-pane.active { display: block; }
 
         /* GRID LAYOUTS */
-        /* Responsive Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Default to 2 columns */
-            gap: 20px;
-        }
+        .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
         .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; text-align: center; }
         .skill-item { padding: 15px; background: #f9f9f9; border-radius: 10px; transition: transform 0.2s; }
@@ -98,18 +97,15 @@
         .timeline-item { border-left: 2px solid var(--primary); padding-left: 20px; margin-bottom: 30px; position: relative; }
         .timeline-item::before { content: ''; width: 12px; height: 12px; background: var(--primary); border-radius: 50%; position: absolute; left: -7px; top: 0; }
 
-        /* LIST STYLES */
         .custom-list li { margin-bottom: 20px; display: flex; align-items: start; }
-        .custom-list i { color: var(--primary); margin-right: 15px; margin-top: 5px; flex-shrink: 0; /* Prevent icon shrinking */ }
+        .custom-list i { color: var(--primary); margin-right: 15px; margin-top: 5px; flex-shrink: 0; }
 
-        /* BUTTONS */
         .btn {
             padding: 12px 30px; background: var(--primary); color: white; text-decoration: none;
             border-radius: 30px; font-weight: bold; display: inline-block; transition: transform 0.2s, box-shadow 0.2s;
         }
-        .btn:active { transform: scale(0.98); } /* Touch feedback */
+        .btn:active { transform: scale(0.98); }
 
-        /* ANIMATIONS */
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
@@ -117,8 +113,8 @@
         /* MOBILE OPTIMIZATIONS */
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
-            .content { padding: 25px 20px; } /* Less padding on mobile */
-            .projects-grid { grid-template-columns: 1fr; } /* Stack projects vertically */
+            .content { padding: 25px 20px; }
+            .projects-grid { grid-template-columns: 1fr; }
             .timeline-item h3 { font-size: 1.1rem; }
             .hero { padding-top: 60px; min-height: auto; padding-bottom: 60px; }
             .tab-btn { font-size: 0.9rem; padding: 15px 20px; }
@@ -128,7 +124,8 @@
 <body>
 
     <div class="hero">
-        <div class="avatar-circle"><i class="fas fa-user-tie"></i></div>
+        <img src="profile.png" alt="Oscar Taradel Jr." class="profile-img">
+        
         <h1>Hi, I'm Oscar.</h1>
         <p class="subtitle">A graduating IT Student with 10+ years of Engineering experience.</p>
         <a href="#portfolio" class="btn" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">See My Work <i class="fas fa-arrow-down ml-2"></i></a>
@@ -189,7 +186,7 @@
                         <div style="background: #f3f4f6; padding: 20px; border-radius: 10px;">
                             <h3 style="color: var(--primary);">Capstone Project</h3>
                             <p style="font-size: 0.9rem;">Online School Event Management System with Student Mobile Services for GVCFI</p>
-                            <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Laravel • Android • IOS React Native </span>
+                            <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Laravel • Android • React Native</span>
                         </div>
                         <div style="background: #f3f4f6; padding: 20px; border-radius: 10px;">
                             <h3 style="color: var(--primary);">Karaoke App</h3>
@@ -255,7 +252,7 @@
             tabPane = document.getElementsByClassName("tab-pane");
             for (i = 0; i < tabPane.length; i++) {
                 tabPane[i].classList.remove("active");
-                tabPane[i].style.display = "none"; // Ensure display none is applied immediately
+                tabPane[i].style.display = "none"; 
             }
 
             // Remove active class from buttons
@@ -267,7 +264,8 @@
             // Show current tab and add active class
             var selectedTab = document.getElementById(tabName);
             selectedTab.style.display = "block";
-            // Small timeout to allow the browser to register the display:block before adding opacity class for animation
+            
+            // Animation timeout
             setTimeout(function() {
                 selectedTab.classList.add("active");
             }, 10);
