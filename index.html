@@ -12,14 +12,14 @@
             --secondary: #24292e;
             --bg: #F9FAFC;
             --white: #ffffff;
-            --text: #333333; /* Darker text for better contrast */
+            --text: #333333;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; 
-            background-color: #1a1a1a; /* Dark fallback color if images fail */
+            background-color: #1a1a1a; 
             color: var(--text); 
             overflow-x: hidden;
             transition: background-image 0.5s ease-in-out;
@@ -28,51 +28,24 @@
         /* --- DYNAMIC BACKGROUND OVERLAY --- */
         body::before {
             content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* DARKER overlay (70%) for readability */
-            z-index: -1;
-            transition: all 0.5s ease-in-out;
-            pointer-events: none; /* Allows clicking through to the body if needed */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            z-index: -1; pointer-events: none;
         }
 
         /* --- BACKGROUND CLASSES --- */
-        /* Note: Replace URLS with your local files if you have them uploaded */
-        body.bg-default {
-            background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
-        body.bg-about {
-            background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
-        body.bg-history {
-            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
-        body.bg-projects {
-            background-image: url('https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
-        body.bg-leadership {
-            background-image: url('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
-        body.bg-certs {
-            background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-        }
+        body.bg-default { background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
+        body.bg-about { background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
+        body.bg-history { background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
+        body.bg-projects { background-image: url('https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
+        body.bg-leadership { background-image: url('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
+        body.bg-certs { background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
 
         /* HERO SECTION */
         .hero {
             min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--white); /* White text for Hero */
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 40px 20px; color: var(--white);
         }
 
         .profile-img {
@@ -87,12 +60,9 @@
         /* MAIN CONTENT CARD */
         .container {
             max-width: 900px; width: 92%;
-            /* HIGH CONTRAST BACKGROUND: 95% Opaque White */
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(10px); /* Blurs the image behind the card */
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5); 
-            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95); /* Solid white */
+            backdrop-filter: blur(10px); border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); overflow: hidden;
             opacity: 0; animation: fadeUp 1.2s forwards 0.5s; margin-bottom: 50px;
         }
 
@@ -117,49 +87,78 @@
         .tab-pane { display: none; animation: slideIn 0.4s ease-out; }
         .tab-pane.active { display: block; }
         
-        /* HEADINGS inside the card */
+        /* HEADINGS */
         .content h2, .content h3 { color: #222; }
 
         /* GRID LAYOUTS */
         .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-        .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 15px; text-align: center; }
-        .skill-item { padding: 15px; background: #f0f0f0; border-radius: 10px; transition: transform 0.2s; border: 1px solid #eee; }
+        .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; text-align: center; }
+        .skill-item { padding: 20px 10px; background: #f0f0f0; border-radius: 10px; transition: transform 0.2s; border: 1px solid #eee; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
         .skill-item:hover { transform: translateY(-5px); background: #e8e8e8; }
         .skill-item i { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
-        .skill-item p { font-size: 0.9rem; margin-bottom: 0; font-weight: 600; color: #444; }
+        .skill-item p { font-size: 0.9rem; margin-bottom: 10px; font-weight: 600; color: #444; }
 
+        /* BUTTONS */
+        .btn {
+            padding: 12px 30px; background: var(--primary); color: white; text-decoration: none;
+            border-radius: 30px; font-weight: bold; display: inline-block; transition: transform 0.2s; border: none;
+        }
+        .btn:active { transform: scale(0.98); }
+
+        /* SMALL "VIEW" BUTTON FOR CERTS */
+        .btn-view {
+            padding: 5px 15px; font-size: 0.8rem; background: transparent; 
+            border: 1px solid var(--primary); color: var(--primary); border-radius: 20px;
+            cursor: pointer; transition: all 0.2s; font-weight: 600;
+        }
+        .btn-view:hover { background: var(--primary); color: white; }
+
+        /* --- MODAL (POPUP) STYLES --- */
+        .modal {
+            display: none; position: fixed; z-index: 9999; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.9); justify-content: center; align-items: center;
+        }
+        .modal-content {
+            max-width: 90%; max-height: 90%; border-radius: 5px; 
+            box-shadow: 0 0 20px rgba(255,255,255,0.2); animation: zoomIn 0.3s;
+        }
+        .close-modal {
+            position: absolute; top: 20px; right: 30px; 
+            color: white; font-size: 40px; font-weight: bold; cursor: pointer;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* TIMELINE & LISTS */
         .timeline-item { border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 30px; position: relative; }
         .timeline-item::before { content: ''; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; position: absolute; left: -8px; top: 0; }
         .timeline-item h3 { margin-bottom: 5px; color: #222; }
-
         .custom-list li { margin-bottom: 25px; display: flex; align-items: start; }
         .custom-list i { color: var(--primary); margin-right: 15px; margin-top: 5px; flex-shrink: 0; }
         .custom-list strong { color: #222; font-size: 1.1rem; }
 
-        .btn {
-            padding: 12px 30px; background: var(--primary); color: white; text-decoration: none;
-            border-radius: 30px; font-weight: bold; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; border: none;
-        }
-        .btn:active { transform: scale(0.98); }
-
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* MOBILE OPTIMIZATIONS */
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
             .content { padding: 30px 20px; }
             .projects-grid { grid-template-columns: 1fr; }
-            .timeline-item h3 { font-size: 1.1rem; }
             .hero { padding-top: 60px; min-height: auto; padding-bottom: 60px; }
             .tab-btn { font-size: 0.95rem; padding: 15px 20px; }
-            .container { width: 95%; margin-bottom: 30px; }
         }
     </style>
 </head>
 <body class="bg-default">
+
+    <div id="certModal" class="modal" onclick="closeCert()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
 
     <div class="hero">
         <img src="profile.png" alt="Oscar Taradel Jr." class="profile-img">
@@ -226,8 +225,8 @@
                             <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Laravel • Android • React Native</span>
                         </div>
                         <div style="background: #f3f4f6; padding: 20px; border-radius: 10px;">
-                            <h3 style="color: var(--primary);">Hybrid Karaoke App</h3>
-                            <p style="font-size: 0.9rem;">Desktop app with playlist queuing and audio control that works online or offline.</p>
+                            <h3 style="color: var(--primary);">Karaoke App</h3>
+                            <p style="font-size: 0.9rem;">Desktop app with playlist queuing and audio control.</p>
                             <span style="font-size: 0.8rem; font-weight: bold; color: #555;">Python • Tkinter</span>
                         </div>
                     </div>
@@ -268,11 +267,32 @@
 
                 <div id="certs" class="tab-pane">
                     <div class="skill-grid">
-                        <div class="skill-item"><i class="fas fa-certificate"></i><p>SAP Certified Operator</p></div>
-                        <div class="skill-item"><i class="fas fa-calculator"></i><p>Bookkeeping TESDA NC III </p></div>
-                        <div class="skill-item"><i class="fas fa-headset"></i><p>Contact Center Services TESDA NC II</p></div>
-                        <div class="skill-item"><i class="fab fa-js-square"></i><p>Zuit JavaScript Bootcamp</p></div>
-                        <div class="skill-item"><i class="fas fa-user-graduate"></i><p>BSIT (2026)</p></div>
+                        
+                        <div class="skill-item">
+                            <i class="fas fa-calculator"></i>
+                            <p>TESDA Bookkeeping NC III</p>
+                            <button class="btn-view" onclick="openCert('cert-bookkeeping.jpg')"><i class="far fa-eye"></i> View</button>
+                        </div>
+
+                        <div class="skill-item">
+                            <i class="fas fa-headset"></i>
+                            <p>TESDA Contact Center NC II</p>
+                            <button class="btn-view" onclick="openCert('cert-contact.jpg')"><i class="far fa-eye"></i> View</button>
+                        </div>
+
+                        <div class="skill-item">
+                            <i class="fas fa-certificate"></i>
+                            <p>SAP Certified Operator</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js-square"></i>
+                            <p>Zuit JavaScript Bootcamp</p>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-user-graduate"></i>
+                            <p>BSIT (2026)</p>
+                        </div>
+
                     </div>
                 </div>
 
@@ -282,6 +302,19 @@
     </div>
 
     <script>
+        // Modal Logic
+        function openCert(imageName) {
+            var modal = document.getElementById("certModal");
+            var modalImg = document.getElementById("modalImg");
+            modal.style.display = "flex";
+            modalImg.src = imageName;
+        }
+
+        function closeCert() {
+            document.getElementById("certModal").style.display = "none";
+        }
+
+        // Tab Logic
         function openTab(evt, tabName, bgClass) {
             var i, tabPane, tabBtn;
             
