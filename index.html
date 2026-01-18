@@ -106,11 +106,19 @@
         }
         .btn:active { transform: scale(0.98); }
 
-        /* SMALL "VIEW" BUTTON FOR CERTS */
+        /* UPDATED SMALL "VIEW" BUTTON */
         .btn-view {
-            padding: 5px 15px; font-size: 0.8rem; background: transparent; 
-            border: 1px solid var(--primary); color: var(--primary); border-radius: 20px;
-            cursor: pointer; transition: all 0.2s; font-weight: 600;
+            padding: 3px 10px; /* Much smaller padding */
+            font-size: 11px; /* Smaller font size */
+            background: transparent; 
+            border: 1px solid var(--primary); 
+            color: var(--primary); 
+            border-radius: 15px;
+            cursor: pointer; 
+            transition: all 0.2s; 
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: auto; /* Pushes button to bottom of card if content varies */
         }
         .btn-view:hover { background: var(--primary); color: white; }
 
@@ -270,13 +278,13 @@
                         
                         <div class="skill-item">
                             <i class="fas fa-calculator"></i>
-                            <p>TESDA Bookkeeping NC III</p>
+                            <p>TESDA NC III Bookkeeping</p>
                             <button class="btn-view" onclick="openCert('cert-bookkeeping.jpg')"><i class="far fa-eye"></i> View</button>
                         </div>
 
                         <div class="skill-item">
                             <i class="fas fa-headset"></i>
-                            <p>TESDA Contact Center NC II</p>
+                            <p>TESDA NC II Contact Center Services</p>
                             <button class="btn-view" onclick="openCert('cert-contact.jpg')"><i class="far fa-eye"></i> View</button>
                         </div>
 
