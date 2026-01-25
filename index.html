@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscar Taradel Jr. | OJT Portfolio</title>
+    <title>Oscar Taradel Jr. | Professional Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,20 +12,39 @@
     <style>
         /* --- DESIGN SYSTEM --- */
         :root {
+            /* Light Mode */
             --primary: #2563eb;       
             --primary-dark: #1e40af;
             --accent: #06b6d4;        
             --gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+            
             --bg-body: #f8fafc;       
             --surface: #ffffff;
             --text-main: #1e293b;     
-            --text-muted: #475569;    
+            --text-muted: #475569;
+            --border-color: rgba(0,0,0,0.05);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            
+            /* Effects */
             --radius: 12px;
             --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        /* --- GLOBAL RESET --- */
+        /* --- DARK MODE --- */
+        [data-theme="dark"] {
+            --bg-body: #0f172a;       
+            --surface: #1e293b;       
+            --text-main: #f1f5f9;     
+            --text-muted: #94a3b8;    
+            --border-color: rgba(255,255,255,0.1);
+            --nav-bg: rgba(15, 23, 42, 0.95);
+            
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- RESET --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         
@@ -35,6 +54,7 @@
             background-color: var(--bg-body);
             line-height: 1.7;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--text-main); letter-spacing: -0.01em; }
@@ -57,58 +77,46 @@
         }
         .section-subtitle { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
-        /* --- STICKY NAVBAR --- */
+        /* --- NAVBAR --- */
         .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 5000;
+            background: var(--nav-bg);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-color);
             padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease;
         }
         .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+        .status-dot { width: 10px; height: 10px; background-color: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 100% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } }
         
-        .nav-logo { 
-            font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.2rem; 
-            color: var(--text-main); display: flex; align-items: center; gap: 8px; 
-        }
-        .status-dot {
-            width: 10px; height: 10px; background-color: #22c55e; border-radius: 50%;
-            box-shadow: 0 0 0 rgba(34, 197, 94, 0.4); animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            100% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
-        }
-
+        .nav-right { display: flex; align-items: center; gap: 30px; }
         .nav-links { display: flex; gap: 30px; }
-        .nav-link { font-weight: 500; font-size: 0.95rem; color: var(--text-muted); position: relative; }
+        .nav-link { font-weight: 500; font-size: 0.95rem; color: var(--text-muted); }
         .nav-link:hover { color: var(--primary); }
 
-        /* --- HERO SECTION --- */
+        .theme-toggle {
+            background: transparent; border: none; cursor: pointer; color: var(--text-main); font-size: 1.2rem;
+            transition: 0.3s ease; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        }
+        .theme-toggle:hover { background: rgba(100,100,100,0.1); color: var(--primary); }
+
+        /* --- HERO --- */
         .hero {
-            min-height: 95vh;
+            min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
             color: #ffffff; text-align: center;
-            padding-top: 80px; position: relative;
+            padding-top: 80px; padding-bottom: 120px; position: relative;
         }
-        
         .hero-content { position: relative; z-index: 10; max-width: 800px; margin: 0 auto; padding: 0 20px; }
         
-        .profile-wrapper {
-            position: relative; width: 180px; height: 180px; margin: 0 auto 30px;
-        }
-        .profile-img {
-            width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-            border: 4px solid rgba(255,255,255,0.2);
-            box-shadow: 0 0 40px rgba(37, 99, 235, 0.4);
-        }
+        .profile-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto 30px; }
+        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); box-shadow: 0 0 40px rgba(37, 99, 235, 0.4); }
         
-        .hero h1 { 
-            font-size: 3.2rem; line-height: 1.1; margin-bottom: 20px; 
-            color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
+        .hero h1 { font-size: 3.2rem; line-height: 1.1; margin-bottom: 20px; color: #ffffff; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .hero p { font-size: 1.25rem; color: #cbd5e1; margin-bottom: 40px; font-weight: 300; max-width: 700px; margin-left: auto; margin-right: auto; }
 
         .btn-cta {
@@ -123,98 +131,100 @@
         .social-icon { 
             width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
             border-radius: 50%; background: rgba(255,255,255,0.1); color: #ffffff;
-            border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;
+            border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s; font-size: 1.2rem;
         }
         .social-icon:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-5px); }
 
-        /* --- ABOUT SUMMARY (NEW) --- */
+        /* --- ABOUT (TRANSITION STORY) --- */
         .about-card {
             background: var(--surface); padding: 40px; border-radius: var(--radius);
             box-shadow: var(--shadow-card); max-width: 900px; margin: -80px auto 0;
-            position: relative; z-index: 10; border-top: 5px solid var(--primary);
-            text-align: center;
+            position: relative; z-index: 20; border-top: 5px solid var(--primary);
+            text-align: center; transition: background-color 0.3s ease;
         }
         .about-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary); }
         .about-card p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; }
 
-        /* --- EXPERIENCE TIMELINE (Expanded Details) --- */
+        /* --- TIMELINE --- */
         .timeline { position: relative; max-width: 900px; margin: 0 auto; }
         .timeline::before {
             content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px;
-            background: #e2e8f0; left: 20px;
+            background: var(--border-color); left: 20px; border-right: 2px solid var(--border-color);
         }
-        
         .timeline-item { position: relative; padding-left: 60px; margin-bottom: 50px; }
-        
         .timeline-dot {
             position: absolute; left: 11px; top: 5px; width: 20px; height: 20px;
             background: var(--surface); border: 4px solid var(--primary); border-radius: 50%; z-index: 2;
+            transition: background-color 0.3s ease;
         }
         
         .job-card {
             background: var(--surface); padding: 30px; border-radius: var(--radius);
-            box-shadow: var(--shadow-card); border: 1px solid #f1f5f9;
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-card); border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
         .job-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: var(--shadow-hover); }
         
         .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
         .job-role { font-size: 1.3rem; font-weight: 700; color: var(--primary); display: block; }
         .job-company { font-size: 1rem; color: var(--text-main); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        
         .job-date { 
-            background: #f1f5f9; padding: 5px 15px; border-radius: 20px; 
-            font-size: 0.85rem; font-weight: 600; color: var(--text-muted); 
+            background: var(--bg-body); padding: 5px 15px; border-radius: 20px; 
+            font-size: 0.85rem; font-weight: 600; color: var(--text-muted); border: 1px solid var(--border-color);
         }
         
-        /* Bullet Points for HR */
         .job-duties { padding-left: 0; margin-top: 15px; }
         .job-duties li {
-            list-style: none; position: relative; padding-left: 25px; margin-bottom: 10px;
-            font-size: 0.95rem; color: var(--text-muted);
+            list-style: none; position: relative; padding-left: 25px; margin-bottom: 10px; font-size: 0.95rem; color: var(--text-muted);
         }
         .job-duties li::before {
             content: '•'; position: absolute; left: 5px; color: var(--primary); font-weight: bold; font-size: 1.2rem; line-height: 1;
         }
+        .job-impact {
+            margin-top: 15px; display: inline-block; background: rgba(34, 197, 94, 0.1); color: #22c55e;
+            padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(34, 197, 94, 0.2);
+        }
 
-        /* --- SKILLS GRID --- */
+        /* --- SKILLS --- */
         .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .skill-group { background: var(--surface); padding: 30px; border-radius: var(--radius); box-shadow: var(--shadow-card); }
+        .skill-group { 
+            background: var(--surface); padding: 30px; border-radius: var(--radius); 
+            box-shadow: var(--shadow-card); transition: background-color 0.3s ease;
+        }
         .skill-group h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font-size: 1.2rem; }
         
         .skill-tag { 
-            display: inline-block; background: #f0f9ff; color: #0369a1; 
+            display: inline-block; background: var(--bg-body); color: var(--text-main); 
             padding: 8px 15px; border-radius: 6px; font-size: 0.9rem; font-weight: 600; margin: 5px 5px 5px 0; 
-            border: 1px solid #e0f2fe; transition: 0.2s;
+            border: 1px solid var(--border-color); transition: 0.2s;
         }
         .skill-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* --- PROJECTS CARDS --- */
+        /* --- PROJECTS --- */
         .project-card {
             background: var(--surface); padding: 0; border-radius: var(--radius);
             box-shadow: var(--shadow-card); overflow: hidden; height: 100%; display: flex; flex-direction: column;
-            border: 1px solid #e2e8f0; transition: transform 0.3s;
+            border: 1px solid var(--border-color); transition: transform 0.3s;
         }
         .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
         
-        .project-header { background: linear-gradient(to right, #f8fafc, #fff); padding: 25px; border-bottom: 1px solid #f1f5f9; }
+        .project-header { background: linear-gradient(to right, var(--bg-body), var(--surface)); padding: 25px; border-bottom: 1px solid var(--border-color); }
         .project-header h3 { color: var(--primary); font-size: 1.3rem; margin-bottom: 0; }
-        
         .project-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
         .project-body p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; }
-        
-        .tech-stack { margin-top: auto; font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid #f1f5f9; padding-top: 15px; }
+        .tech-stack { margin-top: auto; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid var(--border-color); padding-top: 15px; }
 
         /* --- EDUCATION --- */
         .edu-grid { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
         .edu-item {
             display: flex; justify-content: space-between; align-items: center;
             background: var(--surface); padding: 25px 30px; border-radius: var(--radius);
-            box-shadow: var(--shadow-card); border-left: 5px solid #cbd5e1;
-            transition: transform 0.3s;
+            box-shadow: var(--shadow-card); border-left: 5px solid var(--border-color);
+            transition: transform 0.3s, background-color 0.3s;
         }
         .edu-item:hover { transform: translateX(10px); }
         .edu-item.degree { border-left-color: var(--primary); }
-        
         .edu-info h4 { font-size: 1.1rem; margin-bottom: 5px; color: var(--text-main); }
         .edu-info span { font-size: 0.9rem; color: var(--text-muted); }
 
@@ -223,27 +233,43 @@
             color: var(--primary); background: transparent; border: 1px solid var(--primary);
             border-radius: 50px; cursor: pointer; transition: all 0.3s;
         }
-        .btn-view-cert:hover { background: var(--primary); color: var(--surface); }
+        .btn-view-cert:hover { background: var(--primary); color: white; }
+
+        /* --- GOAL SECTION --- */
+        .goal-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white; padding: 60px 20px; text-align: center; border-radius: 20px;
+            margin: 50px auto; max-width: 900px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .goal-section h2 { color: white; margin-bottom: 15px; }
+        .goal-section p { color: #cbd5e1; max-width: 600px; margin: 0 auto 30px; }
+        .goal-btn-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        
+        .btn-hire {
+            background: var(--primary); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 700; transition: 0.2s;
+        }
+        .btn-hire:hover { background: var(--primary-dark); transform: translateY(-3px); }
+        .btn-support {
+            background: rgba(255,255,255,0.1); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); transition: 0.2s;
+        }
+        .btn-support:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
 
         footer { background: #0f172a; color: #94a3b8; padding: 60px 0; text-align: center; margin-top: 50px; }
 
         /* --- MODAL --- */
         .modal {
-            display: none; position: fixed; z-index: 2000; 
+            display: none; position: fixed; z-index: 6000; 
             left: 0; top: 0; width: 100%; height: 100%; 
             background-color: rgba(15, 23, 42, 0.95); backdrop-filter: blur(5px);
             justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s;
         }
         .modal.show { opacity: 1; }
         .modal-content { max-width: 90%; max-height: 90%; border-radius: 12px; box-shadow: 0 0 60px rgba(0,0,0,0.8); transform: scale(0.9); transition: transform 0.3s; }
-        .modal.show .modal-content { transform: scale(1); }
         .close-modal { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 2.5rem; cursor: pointer; }
 
-        /* --- ANIMATION --- */
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- MOBILE --- */
         @media (max-width: 768px) {
             .navbar { padding: 10px 0; }
             .nav-links { display: none; }
@@ -265,12 +291,18 @@
             <div class="nav-logo">
                 <div class="status-dot"></div> Oscar Taradel Jr.
             </div>
-            <ul class="nav-links">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-            </ul>
+            
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -282,26 +314,27 @@
             <h1>Building Systems &<br>Solving Problems.</h1>
             <p>Bridging the gap between 10+ years of Engineering Leadership and Modern Software Development.</p>
             
+            <div style="margin-top: 30px;">
+                <a href="#experience" class="btn-cta">View My Journey</a>
+            </div>
+
             <div class="social-links">
                 <a href="mailto:oscarjr.taradel@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
                 <a href="https://github.com/ojrtaradel" target="_blank" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
                 <a href="tel:09920267966" class="social-icon" title="0992 026 7966"><i class="fas fa-phone"></i></a>
-            </div>
-            
-            <div style="margin-top: 30px;">
-                <a href="#experience" class="btn-cta">View My Journey</a>
             </div>
         </div>
     </header>
 
     <section id="about" style="padding-top: 0;">
         <div class="container">
-            <div class="about-card reveal">
-                <h3>Professional Summary</h3>
+            <div class="about-card">
+                <h3>From Engineering to Software</h3>
                 <p>
-                    I am a graduating BSIT student with a unique advantage: <strong>10 years of real-world corporate experience.</strong> 
-                    While many candidates are just starting, I have already managed technical teams, handled high-priority escalations for US clients, 
-                    and optimized operational workflows. I am now channeling this discipline and reliability into <strong>Full-Stack Development, Mobile App Creation, and QA Testing.</strong>
+                    Why return to school after a decade of success as an Engineer and Manager? <strong>Because I saw the gap.</strong> 
+                    In my years managing fiber optic networks and technical teams, I realized that hardware is only half the picture. 
+                    The future belongs to those who can build the <em>software</em> that controls the hardware. 
+                    <strong>I am now channeling this discipline and reliability into Full-Stack Development, Mobile App Creation, and QA Testing.</strong>
                 </p>
             </div>
         </div>
@@ -332,6 +365,7 @@
                             <li>Collaborated with field technicians to isolate physical layer issues, reducing unnecessary truck rolls by 15%.</li>
                             <li>Maintained strict adherence to SLA targets for issue resolution and ticket documentation.</li>
                         </ul>
+                        <span class="job-impact">Impact: Improved network uptime metrics</span>
                     </div>
                 </div>
 
@@ -350,6 +384,7 @@
                             <li>Handled high-level escalations regarding mobile data protocols (LTE/5G), APN settings, and network provisioning.</li>
                             <li>Mentored junior staff on troubleshooting methodologies, improving team First Call Resolution (FCR) rates.</li>
                         </ul>
+                        <span class="job-impact">Impact: Increased Team FCR by 15%</span>
                     </div>
                 </div>
 
@@ -368,6 +403,7 @@
                             <li>Managed backend account provisioning, ensuring accurate billing and service activation for enterprise clients.</li>
                             <li>Diagnosed complex OS-level conflicts and guided users through advanced recovery procedures.</li>
                         </ul>
+                        <span class="job-impact">Impact: 98% Customer Satisfaction Score</span>
                     </div>
                 </div>
 
@@ -386,6 +422,7 @@
                             <li>Managed CRM databases to track client engagement and lead generation.</li>
                             <li>Coordinated with cross-functional teams to align digital communication strategies with business goals.</li>
                         </ul>
+                        <span class="job-impact">Impact: Successful Multi-National Events</span>
                     </div>
                 </div>
 
@@ -393,7 +430,7 @@
         </div>
     </section>
 
-    <section id="skills" style="background: #eef2ff;">
+    <section id="skills">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Technical & Soft Skills</h2>
@@ -404,23 +441,26 @@
                 <div class="skill-group reveal">
                     <h3><i class="fas fa-laptop-code" style="color:var(--primary)"></i> Development</h3>
                     <div style="margin-top:15px">
-                        <span class="skill-tag">Python (Automation)</span>
-                        <span class="skill-tag">Laravel (PHP)</span>
+                        <span class="skill-tag">Python (Scripting & Tkinter)</span>
+                        <span class="skill-tag">HTML5 & CSS3</span>
                         <span class="skill-tag">JavaScript (ES6+)</span>
+                        <span class="skill-tag">Laravel (PHP)</span>
                         <span class="skill-tag">React Native</span>
-                        <span class="skill-tag">Android Studio</span>
+                        <span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">UI/UX Principles</span>
                         <span class="skill-tag">Git/GitHub</span>
                     </div>
                 </div>
                 
                 <div class="skill-group reveal">
-                    <h3><i class="fas fa-database" style="color:var(--primary)"></i> Systems & Tools</h3>
+                    <h3><i class="fas fa-database" style="color:var(--primary)"></i> Systems & QA</h3>
                     <div style="margin-top:15px">
+                        <span class="skill-tag">QA Testing & Debugging</span>
                         <span class="skill-tag">MySQL / Database Design</span>
                         <span class="skill-tag">SAP ERP Systems</span>
                         <span class="skill-tag">Network Diagnostics</span>
                         <span class="skill-tag">CRM Management</span>
-                        <span class="skill-tag">QA Testing</span>
+                        <span class="skill-tag">Android Studio</span>
                     </div>
                 </div>
                 
@@ -445,9 +485,10 @@
                 <p class="section-subtitle">Applying theory to solve real-world problems.</p>
             </div>
             
-            <div class="skills-grid"> <div class="project-card reveal">
+            <div class="skills-grid"> 
+                <div class="project-card reveal">
                     <div class="project-header">
-                        <h3>Capstone Project: Online School Event Management System with Student Mobile Services for GVCFI</h3>
+                        <h3>Capstone Project: Event Management</h3>
                     </div>
                     <div class="project-body">
                         <p><strong>The Challenge:</strong> The client (GVCFI) was using manual logbooks for student events, leading to slow attendance tracking and data errors.</p>
@@ -468,12 +509,11 @@
                         </div>
                     </div>
                 </a>
-
             </div>
         </div>
     </section>
 
-    <section id="education" style="background: #f8fafc;">
+    <section id="education">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Education & Certifications</h2>
@@ -523,6 +563,17 @@
         </div>
     </section>
 
+    <section class="container">
+        <div class="goal-section reveal">
+            <h2>Goal 2026: Graduation & Professional Re-entry</h2>
+            <p>I am a working student actively seeking an OJT placement that values maturity, reliability, and technical skill. My goal is to graduate in 2026 and fully transition into the software industry.</p>
+            <div class="goal-btn-group">
+                <a href="mailto:oscarjr.taradel@gmail.com" class="btn-hire">Hire Me for OJT</a>
+                <a href="#" class="btn-support">Support My Journey</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <p>&copy; 2026 Oscar Taradel Jr. | Ready to Deploy.</p>
@@ -535,7 +586,32 @@
     </div>
 
     <script>
-        // Modal Logic
+        // DARK MODE
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.hasAttribute('data-theme')) {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+
+        // MODAL
         function openCert(imageName) {
             const modal = document.getElementById("certModal");
             const modalImg = document.getElementById("modalImg");
@@ -550,7 +626,7 @@
             setTimeout(() => { modal.style.display = "none"; }, 300);
         }
 
-        // Scroll Animation Logic
+        // SCROLL REVEAL
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             for (let i = 0; i < reveals.length; i++) {
@@ -563,7 +639,7 @@
             }
         }
         window.addEventListener("scroll", reveal);
-        reveal(); // Trigger on load
+        reveal();
     </script>
 
 </body>
