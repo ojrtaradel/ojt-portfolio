@@ -235,17 +235,16 @@
             flex-direction: column;
             border: 1px solid var(--border-color); 
             transition: transform 0.3s;
-            /* CRITICAL FIX: Allow images to pop out of card boundaries */
+            /* Allow images to pop out */
             overflow: visible; 
             position: relative;
             z-index: 1;
         }
-        /* Fix Corners because overflow is visible */
         .project-header { 
             background: linear-gradient(to right, var(--bg-body), var(--surface)); 
             padding: 25px; 
             border-bottom: 1px solid var(--border-color);
-            border-radius: var(--radius) var(--radius) 0 0; /* Only top corners */
+            border-radius: var(--radius) var(--radius) 0 0; 
         }
         .project-header h3 { color: var(--primary); font-size: 1.3rem; margin-bottom: 0; }
         .project-body { 
@@ -253,7 +252,7 @@
             flex-grow: 1; 
             display: flex; 
             flex-direction: column; 
-            border-radius: 0 0 var(--radius) var(--radius); /* Only bottom corners */
+            border-radius: 0 0 var(--radius) var(--radius); 
         }
         .project-body p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; }
         .tech-stack { margin-top: auto; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid var(--border-color); padding-top: 15px; }
@@ -266,25 +265,44 @@
             margin-bottom: 20px;
             justify-content: center;
         }
+        /* Base Thumb (Mobile/Vertical) */
         .gallery-thumb {
-            width: 28%; /* Fit 3 side by side */
-            height: auto; /* Let height adjust naturally (Long picture) */
-            aspect-ratio: 9/19; /* Force vertical mobile shape */
+            width: 30%; 
+            height: 100px; 
+            aspect-ratio: 9/19; /* Force Mobile Ratio */
+            object-fit: cover; 
             border-radius: 6px;
-            object-fit: cover;
             border: 1px solid var(--border-color);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: zoom-in;
             background: white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        /* MASSIVE ZOOM EFFECT */
+        
+        /* Landscape Thumb (Desktop) */
+        .gallery-thumb.landscape {
+            aspect-ratio: 16/9; /* Force Desktop Ratio */
+            width: 30%;
+            height: auto;
+        }
+
+        /* ZOOM EFFECT */
         .gallery-thumb:hover {
-            transform: scale(3.5); /* 350% Zoom */
-            z-index: 999; /* Bring to front */
+            transform: scale(3.5); /* Big Zoom */
+            z-index: 999; 
             position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5); /* Deep shadow */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
             border: 2px solid var(--primary);
+            object-fit: contain; 
+            background: var(--surface);
+            height: auto;
+            min-height: 200px; 
+        }
+        
+        /* Specific Zoom for Landscape (Needs less vertical zoom) */
+        .gallery-thumb.landscape:hover {
+            transform: scale(2.5); /* Slightly less zoom because it's wide */
+            min-width: 300px;
         }
 
         /* --- EDUCATION --- */
@@ -368,7 +386,7 @@
             .social-links { flex-direction: column; align-items: center; width: 100%; }
             .social-icon { width: 100%; max-width: 320px; justify-content: center; }
             
-            /* Disable Zoom on Mobile to prevent overflow */
+            /* Disable Zoom on Mobile */
             .gallery-thumb:hover { transform: none; box-shadow: none; border-color: var(--border-color); }
         }
     </style>
@@ -626,6 +644,13 @@
                         <div class="project-body">
                             <p><strong>The Challenge:</strong> Existing karaoke solutions required constant internet or lacked playlist management.</p>
                             <p style="margin-top:10px;"><strong>The Solution:</strong> Built a Python-based desktop application that supports both online streaming and offline playback. Features include a dynamic queuing system, audio equalization, and file management.</p>
+                            
+                            <div class="project-gallery">
+                                <img src="hybrid1.png" alt="Karaoke Screen 1" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid1.jpg')">
+                                <img src="hybrid2.png" alt="Karaoke Screen 2" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid2.jpg')">
+                                <img src="hybrid3.png" alt="Karaoke Screen 3" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid3.jpg')">
+                            </div>
+
                             <div class="tech-stack">Python • Tkinter • Git • Audio Engineering</div>
                         </div>
                     </div>
@@ -684,7 +709,7 @@
         </div>
     </section>
 
-    <section id="seminars" style="background: #eef2ff;">
+    <section id="seminars">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Seminars & Training</h2>
@@ -749,7 +774,6 @@
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="modalImg">
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
             gsap.registerPlugin(ScrollTrigger);
