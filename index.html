@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscar Taradel Jr. | OJT Portfolio</title>
+    <title>Oscar Taradel Jr. | OJT</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,7 +220,8 @@
         .skill-tag { 
             display: inline-block; background: var(--bg-body); color: var(--text-main); 
             padding: 8px 15px; border-radius: 6px; font-size: 0.9rem; font-weight: 600; margin: 5px 5px 5px 0; 
-            border: 1px solid var(--border-color); transition: 0.2s;
+            border: 1px solid var(--border-color); 
+            transition: border-color 0.5s ease, box-shadow 0.5s ease, color 0.5s ease;
         }
         .skill-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
@@ -235,7 +236,6 @@
             flex-direction: column;
             border: 1px solid var(--border-color); 
             transition: transform 0.3s;
-            /* Allow images to pop out */
             overflow: visible; 
             position: relative;
             z-index: 1;
@@ -269,7 +269,7 @@
         .gallery-thumb {
             width: 30%; 
             height: 100px; 
-            aspect-ratio: 9/19; /* Force Mobile Ratio */
+            aspect-ratio: 9/19; 
             object-fit: cover; 
             border-radius: 6px;
             border: 1px solid var(--border-color);
@@ -281,14 +281,14 @@
         
         /* Landscape Thumb (Desktop) */
         .gallery-thumb.landscape {
-            aspect-ratio: 16/9; /* Force Desktop Ratio */
+            aspect-ratio: 16/9; 
             width: 30%;
             height: auto;
         }
 
         /* ZOOM EFFECT */
         .gallery-thumb:hover {
-            transform: scale(3.5); /* Big Zoom */
+            transform: scale(3.5); 
             z-index: 999; 
             position: relative;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
@@ -299,9 +299,8 @@
             min-height: 200px; 
         }
         
-        /* Specific Zoom for Landscape (Needs less vertical zoom) */
         .gallery-thumb.landscape:hover {
-            transform: scale(2.5); /* Slightly less zoom because it's wide */
+            transform: scale(2.5); 
             min-width: 300px;
         }
 
@@ -646,9 +645,9 @@
                             <p style="margin-top:10px;"><strong>The Solution:</strong> Built a Python-based desktop application that supports both online streaming and offline playback. Features include a dynamic queuing system, audio equalization, and file management.</p>
                             
                             <div class="project-gallery">
-                                <img src="hybrid1.png" alt="Karaoke Screen 1" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid1.jpg')">
-                                <img src="hybrid2.png" alt="Karaoke Screen 2" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid2.jpg')">
-                                <img src="hybrid3.png" alt="Karaoke Screen 3" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid3.jpg')">
+                                <img src="hybrid1.png" alt="Karaoke Screen 1" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid1.png')">
+                                <img src="hybrid2.png" alt="Karaoke Screen 2" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid2.png')">
+                                <img src="hybrid3.png" alt="Karaoke Screen 3" class="gallery-thumb landscape" onclick="event.preventDefault(); openCert('hybrid3.png')">
                             </div>
 
                             <div class="tech-stack">Python • Tkinter • Git • Audio Engineering</div>
@@ -722,7 +721,7 @@
                         <img src="seminar1.jpg" alt="She Codes the Future" class="seminar-img" onclick="openCert('seminar1.jpg')">
                     </div>
                     <div class="seminar-content">
-                        <span class="seminar-date">2025</span>
+                        <span class="seminar-date">March 22, 2025</span>
                         <h3 class="seminar-title">She Codes the Future</h3>
                         <p class="seminar-desc">Empowering the next generation of tech leaders through inclusive coding education and mentorship.</p>
                     </div>
@@ -733,7 +732,7 @@
                         <img src="seminar2.jpg" alt="Cybersecurity Awareness" class="seminar-img" onclick="openCert('seminar2.jpg')">
                     </div>
                     <div class="seminar-content">
-                        <span class="seminar-date">2025</span>
+                        <span class="seminar-date">May 26, 2025</span>
                         <h3 class="seminar-title">Cybersecurity Awareness</h3>
                         <p class="seminar-desc">Understanding modern digital threats, data privacy best practices, and secure network protocols.</p>
                     </div>
@@ -774,26 +773,29 @@
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="modalImg">
     </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
+            
+            // Register GSAP plugins
             gsap.registerPlugin(ScrollTrigger);
 
-            // HERO SEQUENCE
+            // --- 1. HERO SEQUENCE ---
             const tl = gsap.timeline();
             tl.from(".navbar", { y: -100, opacity: 0, duration: 1, ease: "power4.out" })
               .from(".profile-img", { scale: 0.5, opacity: 0, rotation: -10, duration: 1.2, ease: "back.out(1.7)" }, "-=0.5")
               .from(".hero h1, .hero p, .btn-cta, .social-links", { y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power2.out" }, "-=0.8");
 
-            // FADE UP CARDS
-            const cards = gsap.utils.toArray(".about-card, .job-card, .skill-group, .project-card, .seminar-card, .edu-item");
+            // --- 2. FADE UP CARDS (Exclude skill-group to prevent conflict) ---
+            const cards = gsap.utils.toArray(".about-card, .job-card, .project-card, .seminar-card, .edu-item");
             cards.forEach(card => {
                 gsap.from(card, {
-                    scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none reverse" },
-                    y: 50, opacity: 0, duration: 0.6, ease: "power2.out"
+                    scrollTrigger: { trigger: card, start: "top 90%", toggleActions: "play none none reverse" },
+                    y: 50, opacity: 0, duration: 0.8, ease: "power2.out"
                 });
             });
 
-            // SECTION HEADERS
+            // --- 3. SECTION TITLES ---
             gsap.utils.toArray(".section-header").forEach(header => {
                 gsap.from(header, {
                     scrollTrigger: { trigger: header, start: "top 80%", toggleActions: "play none none reverse" },
@@ -801,7 +803,48 @@
                 });
             });
 
-            // DARK MODE
+            // --- 4. SKILLS: STAGGER ENTER + TECH BLINK (FIXED) ---
+            const techColors = ["#2563eb", "#06b6d4", "#a855f7", "#ec4899", "#22c55e"];
+
+            gsap.utils.toArray(".skill-group").forEach((group) => {
+                const tags = group.querySelectorAll(".skill-tag");
+
+                // Step A: Animate the Card Container
+                gsap.from(group, {
+                    scrollTrigger: { trigger: group, start: "top 85%" },
+                    y: 50, opacity: 0, duration: 0.6, ease: "power2.out"
+                });
+
+                // Step B: Animate the Tags (Staggered Entrance)
+                gsap.fromTo(tags, 
+                    { y: 20, opacity: 0, scale: 0.8 }, // Starting state (Hidden)
+                    { 
+                        y: 0, opacity: 1, scale: 1,    // Ending state (Visible)
+                        duration: 0.5, 
+                        stagger: 0.1, 
+                        ease: "back.out(1.7)",
+                        scrollTrigger: { trigger: group, start: "top 85%" },
+                        
+                        // Step C: Start Blinking ONLY after they appear
+                        onComplete: () => {
+                            tags.forEach(tag => {
+                                gsap.to(tag, {
+                                    borderColor: () => gsap.utils.random(techColors),
+                                    boxShadow: () => `0 0 8px ${gsap.utils.random(techColors)}`,
+                                    color: () => gsap.utils.random(techColors),
+                                    duration: () => gsap.utils.random(0.5, 2.5),
+                                    repeat: -1,
+                                    repeatRefresh: true,
+                                    yoyo: true,
+                                    ease: "sine.inOut"
+                                });
+                            });
+                        }
+                    }
+                );
+            });
+
+            // --- 5. DARK MODE LOGIC ---
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
             const icon = themeToggle.querySelector('i');
@@ -828,14 +871,20 @@
             });
         });
 
-        // MODAL
+        // --- 6. MODAL LOGIC ---
         function openCert(imageName) {
             const modal = document.getElementById("certModal");
             const modalImg = document.getElementById("modalImg");
             const modalContent = modal.querySelector('.modal-content');
+            
             modal.style.display = "flex";
             modalImg.src = imageName;
-            gsap.fromTo(modalContent, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.2)" });
+            
+            gsap.fromTo(modalContent, 
+                { scale: 0.5, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.2)" }
+            );
+
             setTimeout(() => { modal.classList.add("show"); }, 10);
         }
 
