@@ -11,6 +11,8 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 
     <style>
         /* --- DESIGN SYSTEM (CSS VARIABLES) --- */
@@ -106,14 +108,28 @@
         }
         .theme-toggle:hover { background: rgba(100,100,100,0.1); color: var(--primary); }
 
-        /* --- HERO --- */
+        /* --- HERO & CANVAS --- */
         .hero {
             min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
             color: #ffffff; text-align: center;
             padding-top: 80px; padding-bottom: 120px; position: relative;
+            overflow: hidden; /* Prevent canvas from breaking layout */
         }
+        
+        /* NEW: Canvas Positioning */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Sits behind the text */
+            pointer-events: none; /* Allows you to click buttons through the canvas */
+            opacity: 0; /* Starts hidden, GSAP will fade it in */
+        }
+
         .hero-content { position: relative; z-index: 10; max-width: 800px; margin: 0 auto; padding: 0 20px; }
         
         .profile-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto 30px; }
@@ -257,7 +273,7 @@
         .project-body p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; }
         .tech-stack { margin-top: auto; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid var(--border-color); padding-top: 15px; }
 
-        /* --- PROJECT SCREENSHOT GALLERY (FIXED) --- */
+        /* --- PROJECT SCREENSHOT GALLERY --- */
         .project-gallery {
             display: flex;
             gap: 15px;
@@ -414,6 +430,8 @@
     </nav>
 
     <header class="hero">
+        <canvas id="hero-canvas"></canvas>
+        
         <div class="hero-content">
             <div class="profile-wrapper">
                 <img src="profile.png" alt="Oscar Taradel Jr." class="profile-img">
@@ -780,13 +798,99 @@
             // Register GSAP plugins
             gsap.registerPlugin(ScrollTrigger);
 
-            // --- 1. HERO SEQUENCE ---
+            // ==========================================
+            // 1. THREE.JS: DIGITAL DATA NETWORK HERO BACKGROUND
+            // ==========================================
+            const canvas = document.querySelector('#hero-canvas');
+            const scene = new THREE.Scene();
+            // Set up camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Create Data Particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 800; // Amount of nodes
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for(let i = 0; i < particlesCount * 3; i++) {
+                // Spread particles across a wide 3D space
+                posArray[i] = (Math.random() - 0.5) * 15; 
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            // IT Theme: Glowing Cyan/Blue Nodes
+            const material = new THREE.PointsMaterial({
+                size: 0.025,
+                color: 0x06b6d4, // Matches your --accent color
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+
+            camera.position.z = 4;
+
+            // Mouse Interaction for Parallax
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - windowHalfX);
+                mouseY = (event.clientY - windowHalfY);
+            });
+
+            // Smooth Render Loop
+            const clock = new THREE.Clock();
+
+            function animateThreeJS() {
+                requestAnimationFrame(animateThreeJS);
+                const elapsedTime = clock.getElapsedTime();
+
+                // Slow ambient rotation
+                particlesMesh.rotation.y = elapsedTime * 0.05;
+                particlesMesh.rotation.x = elapsedTime * 0.02;
+
+                // GSAP-style smoothing for mouse follow (Parallax)
+                targetX = mouseX * 0.001;
+                targetY = mouseY * 0.001;
+                
+                particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
+                particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
+
+                renderer.render(scene, camera);
+            }
+            animateThreeJS();
+
+            // Handle browser resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // ==========================================
+            // 2. GSAP UI ANIMATIONS
+            // ==========================================
             const tl = gsap.timeline();
-            tl.from(".navbar", { y: -100, opacity: 0, duration: 1, ease: "power4.out" })
+            
+            // Fade in the 3D Canvas gracefully
+            tl.to(canvas, { opacity: 0.5, duration: 2, ease: "power2.inOut" }, 0);
+            
+            tl.from(".navbar", { y: -100, opacity: 0, duration: 1, ease: "power4.out" }, 0)
               .from(".profile-img", { scale: 0.5, opacity: 0, rotation: -10, duration: 1.2, ease: "back.out(1.7)" }, "-=0.5")
               .from(".hero h1, .hero p, .btn-cta, .social-links", { y: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power2.out" }, "-=0.8");
 
-            // --- 2. FADE UP CARDS (Exclude skill-group to prevent conflict) ---
+            // --- FADE UP CARDS ---
             const cards = gsap.utils.toArray(".about-card, .job-card, .project-card, .seminar-card, .edu-item");
             cards.forEach(card => {
                 gsap.from(card, {
@@ -795,7 +899,7 @@
                 });
             });
 
-            // --- 3. SECTION TITLES ---
+            // --- SECTION TITLES ---
             gsap.utils.toArray(".section-header").forEach(header => {
                 gsap.from(header, {
                     scrollTrigger: { trigger: header, start: "top 80%", toggleActions: "play none none reverse" },
@@ -803,29 +907,26 @@
                 });
             });
 
-            // --- 4. SKILLS: STAGGER ENTER + TECH BLINK (FIXED) ---
+            // --- SKILLS: STAGGER ENTER + TECH BLINK ---
             const techColors = ["#2563eb", "#06b6d4", "#a855f7", "#ec4899", "#22c55e"];
 
             gsap.utils.toArray(".skill-group").forEach((group) => {
                 const tags = group.querySelectorAll(".skill-tag");
 
-                // Step A: Animate the Card Container
                 gsap.from(group, {
                     scrollTrigger: { trigger: group, start: "top 85%" },
                     y: 50, opacity: 0, duration: 0.6, ease: "power2.out"
                 });
 
-                // Step B: Animate the Tags (Staggered Entrance)
                 gsap.fromTo(tags, 
-                    { y: 20, opacity: 0, scale: 0.8 }, // Starting state (Hidden)
+                    { y: 20, opacity: 0, scale: 0.8 }, 
                     { 
-                        y: 0, opacity: 1, scale: 1,    // Ending state (Visible)
+                        y: 0, opacity: 1, scale: 1, 
                         duration: 0.5, 
                         stagger: 0.1, 
                         ease: "back.out(1.7)",
                         scrollTrigger: { trigger: group, start: "top 85%" },
                         
-                        // Step C: Start Blinking ONLY after they appear
                         onComplete: () => {
                             tags.forEach(tag => {
                                 gsap.to(tag, {
@@ -844,7 +945,7 @@
                 );
             });
 
-            // --- 5. DARK MODE LOGIC ---
+            // --- DARK MODE LOGIC ---
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
             const icon = themeToggle.querySelector('i');
@@ -871,7 +972,7 @@
             });
         });
 
-        // --- 6. MODAL LOGIC ---
+        // --- MODAL LOGIC ---
         function openCert(imageName) {
             const modal = document.getElementById("certModal");
             const modalImg = document.getElementById("modalImg");
