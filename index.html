@@ -115,19 +115,18 @@
             background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
             color: #ffffff; text-align: center;
             padding-top: 80px; padding-bottom: 120px; position: relative;
-            overflow: hidden; /* Prevent canvas from breaking layout */
+            overflow: hidden; 
         }
         
-        /* NEW: Canvas Positioning */
         #hero-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Sits behind the text */
-            pointer-events: none; /* Allows you to click buttons through the canvas */
-            opacity: 0; /* Starts hidden, GSAP will fade it in */
+            z-index: 1; 
+            pointer-events: none; 
+            opacity: 0; 
         }
 
         .hero-content { position: relative; z-index: 10; max-width: 800px; margin: 0 auto; padding: 0 20px; }
@@ -239,7 +238,6 @@
             border: 1px solid var(--border-color); 
             transition: border-color 0.5s ease, box-shadow 0.5s ease, color 0.5s ease;
         }
-        .skill-tag:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
         /* --- PROJECTS CARD STYLING --- */
         .project-card {
@@ -649,6 +647,26 @@
                             </div>
 
                             <div class="tech-stack">Flutter • Firebase • Dart • Web App</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/ojrtaradel/my-meter-splitter" target="_blank" style="display:block; height:100%;">
+                    <div class="project-card" style="border-color: var(--primary);">
+                        <div class="project-header">
+                            <h3>My Meter Splitter <i class="fas fa-external-link-alt" style="font-size:0.8em"></i></h3>
+                        </div>
+                        <div class="project-body">
+                            <p><strong>The Challenge:</strong> Manually calculating and dividing utility bills among renters is often tedious and prone to disputes.</p>
+                            <p style="margin-top:10px;"><strong>The Solution:</strong> An Android mobile application that automates utility bill division. It features a configured database to log meter readings, calculate individual shares, and provide transparent tracking for everyone involved.</p>
+                            
+                            <div class="project-gallery">
+                                <img src="meter1.jpg" alt="Screen 1" class="gallery-thumb" onclick="event.preventDefault(); openCert('meter1.jpg')">
+                                <img src="meter2.jpg" alt="Screen 2" class="gallery-thumb" onclick="event.preventDefault(); openCert('meter2.jpg')">
+                                <img src="meter3.jpg" alt="Screen 3" class="gallery-thumb" onclick="event.preventDefault(); openCert('meter3.jpg')">
+                            </div>
+
+                            <div class="tech-stack">Android • Database • Mobile App</div>
                         </div>
                     </div>
                 </a>
